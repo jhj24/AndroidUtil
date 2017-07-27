@@ -57,13 +57,20 @@ public class UIUtil {
     /**
      * 显示软键盘
      *
-     * @param context
+     * @param context context
+     * @param view    view
      */
     public static void showKeyboard(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(view, 0);
     }
 
+    /**
+     * 隐藏软键盘
+     *
+     * @param context context
+     * @param view    view
+     */
     public static void dismissKeyBoard(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
