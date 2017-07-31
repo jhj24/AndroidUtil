@@ -1,4 +1,4 @@
-package jhj.com.library;
+package jhj.com.library.util;
 
 /**
  * 合法性验证

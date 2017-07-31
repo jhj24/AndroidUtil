@@ -1,14 +1,14 @@
-package jhj.com.library;
+package jhj.com.library.bean;
 
 /**
  * Created by jhj on 17-7-27.
  */
 
-public class Gps {
+public class LatLonBean {
     private double wgLat;
     private double wgLon;
 
-    public Gps(double wgLat, double wgLon) {
+    public LatLonBean(double wgLat, double wgLon) {
         setWgLat(wgLat);
         setWgLon(wgLon);
     }

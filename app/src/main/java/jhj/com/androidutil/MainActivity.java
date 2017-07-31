@@ -3,7 +3,7 @@ package jhj.com.androidutil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import jhj.com.library.LegalityUtil;
+import jhj.com.library.util.LegalityUtil;
 
 public class MainActivity extends AppCompatActivity {
 

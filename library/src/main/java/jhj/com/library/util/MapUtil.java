@@ -1,6 +1,8 @@
-package jhj.com.library;
+package jhj.com.library.util;
 
 import java.math.BigDecimal;
+
+import jhj.com.library.bean.LatLonBean;
 
 /**
  * 地图工具
@@ -60,9 +62,9 @@ public class MapUtil {
      *
      * @param lat lat
      * @param lon lon
-     * @return Gps
+     * @return LatLonBean
      */
-    public static Gps gps84_To_Gcj02(double lat, double lon) {
+    public static LatLonBean gps84_To_Gcj02(double lat, double lon) {
         if (outOfChina(lat, lon)) {
             return null;
         }
@@ -76,17 +78,17 @@ public class MapUtil {
         dLon = (dLon * 180.0) / (a / sqrtMagic * Math.cos(radLat) * pi);
         double mgLat = lat + dLat;
         double mgLon = lon + dLon;
-        return new Gps(mgLat, mgLon);
+        return new LatLonBean(mgLat, mgLon);
     }
 
     /**
      * GCJ-02 to WGS84
      */
-    public static Gps gcj_To_Gps84(double lat, double lon) {
-        Gps gps = transform(lat, lon);
+    public static LatLonBean gcj_To_Gps84(double lat, double lon) {
+        LatLonBean gps = transform(lat, lon);
         double lontitude = lon * 2 - gps.getWgLon();
         double latitude = lat * 2 - gps.getWgLat();
-        return new Gps(latitude, lontitude);
+        return new LatLonBean(latitude, lontitude);
     }
 
     /**
@@ -94,30 +96,30 @@ public class MapUtil {
      *
      * @param gg_lat gg_lat
      * @param gg_lon gg_lat
-     * @return Gps
+     * @return LatLonBean
      */
-    public static Gps gcj02_To_Bd09(double gg_lat, double gg_lon) {
+    public static LatLonBean gcj02_To_Bd09(double gg_lat, double gg_lon) {
         double x = gg_lon, y = gg_lat;
         double z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * pi);
         double theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * pi);
         double bd_lon = z * Math.cos(theta) + 0.0065;
         double bd_lat = z * Math.sin(theta) + 0.006;
-        return new Gps(bd_lat, bd_lon);
+        return new LatLonBean(bd_lat, bd_lon);
     }
 
     /**
      * BD-09 To GCJ-02
      * @param bd_lat bd_lat
      * @param bd_lon bd_lat
-     * @return Gps
+     * @return LatLonBean
      */
-    public static Gps bd09_To_Gcj02(double bd_lat, double bd_lon) {
+    public static LatLonBean bd09_To_Gcj02(double bd_lat, double bd_lon) {
         double x = bd_lon - 0.0065, y = bd_lat - 0.006;
         double z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * pi);
         double theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * pi);
         double gg_lon = z * Math.cos(theta);
         double gg_lat = z * Math.sin(theta);
-        return new Gps(gg_lat, gg_lon);
+        return new LatLonBean(gg_lat, gg_lon);
     }
 
     /**
@@ -125,11 +127,11 @@ public class MapUtil {
      *
      * @param bd_lat bd_lat
      * @param bd_lon bd_lat
-     * @return Gps
+     * @return LatLonBean
      */
-    public static Gps bd09_To_Gps84(double bd_lat, double bd_lon) {
+    public static LatLonBean bd09_To_Gps84(double bd_lat, double bd_lon) {
 
-        Gps gcj02 = bd09_To_Gcj02(bd_lat, bd_lon);
+        LatLonBean gcj02 = bd09_To_Gcj02(bd_lat, bd_lon);
         return gcj_To_Gps84(gcj02.getWgLat(),
                 gcj02.getWgLon());
 
@@ -142,8 +144,8 @@ public class MapUtil {
      * @param gps_lon gps_lat
      * @return GPS
      */
-    public static Gps Gps84_To_bd09(double gps_lat, double gps_lon) {
-        Gps gcj02 = gps84_To_Gcj02(gps_lat, gps_lon);
+    public static LatLonBean Gps84_To_bd09(double gps_lat, double gps_lon) {
+        LatLonBean gcj02 = gps84_To_Gcj02(gps_lat, gps_lon);
         if (gcj02 == null)
             return null;
         return gcj02_To_Bd09(gcj02.getWgLat(), gcj02.getWgLon());
@@ -153,9 +155,9 @@ public class MapUtil {
         return lon < 72.004 || lon > 137.8347 || lat < 0.8293 || lat > 55.8271;
     }
 
-    private static Gps transform(double lat, double lon) {
+    private static LatLonBean transform(double lat, double lon) {
         if (outOfChina(lat, lon)) {
-            return new Gps(lat, lon);
+            return new LatLonBean(lat, lon);
         }
         double dLat = transformLat(lon - 105.0, lat - 35.0);
         double dLon = transformLon(lon - 105.0, lat - 35.0);
@@ -167,7 +169,7 @@ public class MapUtil {
         dLon = (dLon * 180.0) / (a / sqrtMagic * Math.cos(radLat) * pi);
         double mgLat = lat + dLat;
         double mgLon = lon + dLon;
-        return new Gps(mgLat, mgLon);
+        return new LatLonBean(mgLat, mgLon);
     }
 
     private static double transformLat(double x, double y) {
