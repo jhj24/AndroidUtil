@@ -1,8 +1,10 @@
 package jhj.com.library.util;
 
 import android.content.Context;
+import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 /**
  * 界面信息
@@ -76,5 +78,38 @@ public class UIUtil {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    /**
+     * 设置EditText是否可以输入
+     *
+     * @param isEnable  　boolean
+     * @param editTexts View
+     */
+    public static void setEditTextEnable(boolean isEnable, EditText... editTexts) {
+        if (editTexts != null) {
+            for (int i = editTexts.length - 1; i >= 0; i--) {
+                EditText editText = editTexts[i];
+                editText.setFocusable(isEnable);
+                editText.setCursorVisible(isEnable);
+                editText.setFocusableInTouchMode(isEnable);
+                if (isEnable) {
+                    editText.requestFocus();
+                }
+            }
+        }
+    }
+
+    /**
+     * 设置控件是否可见
+     *
+     * @param visibility int
+     * @param views      View
+     */
+    public static void ssetViewVisibility(int visibility, View... views) {
+        if (null != views) {
+            for (View view : views) {
+                view.setVisibility(visibility);
+            }
+        }
+    }
 
 }

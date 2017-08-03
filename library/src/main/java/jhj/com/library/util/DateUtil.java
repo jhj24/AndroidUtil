@@ -47,7 +47,7 @@ public class DateUtil {
     /**
      * Calendar -> long
      *
-     * @param calendar calender
+     * @param calendar calendar
      * @return long
      */
     public static long getCalanderToMillis(Calendar calendar) {
@@ -81,24 +81,24 @@ public class DateUtil {
 
 
     /**
-     * Calender -> String
+     * Calendar -> String
      *
      * @param calendar calendar
-     * @param pattern eg、"yyyy-MM-dd"..
+     * @param pattern  eg、"yyyy-MM-dd"..
      * @return String
      */
-    public static String getCalenderToString(Calendar calendar, String pattern) {
+    public static String getCalendarToString(Calendar calendar, String pattern) {
         SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.CHINA);
         return sdf.format(calendar.getTime());
     }
 
     /**
-     * Calender -> Date
+     * Calendar -> Date
      *
      * @param calendar calendar
      * @return Date
      */
-    public static Date getCalenderToData(Calendar calendar) {
+    public static Date getCalendarToData(Calendar calendar) {
         return calendar.getTime();
     }
 
@@ -125,6 +125,30 @@ public class DateUtil {
         return sdf.parse(string);
     }
 
+    /**
+     * date -> Calendar
+     *
+     * @param date date
+     * @return Calendar
+     */
+    public static Calendar getDateToCalendar(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+    }
+
+    /**
+     * long -> Calendar
+     *
+     * @param millis millis
+     * @return calendar
+     */
+    public static Calendar getLongToCalendar(long millis) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(millis);
+        return calendar;
+    }
+
 
     /**
      * 获取当天起始时间的毫秒值
@@ -132,8 +156,8 @@ public class DateUtil {
      * @return long
      */
     public static long getMillisOfToday() {
-        Calendar toDay = Calendar.getInstance();
-        return chooseDate(toDay);
+        Calendar calendar = Calendar.getInstance();
+        return chooseDate(calendar);
     }
 
     /**
@@ -142,9 +166,9 @@ public class DateUtil {
      * @return long
      */
     public static long getMillisOfWeek() {
-        Calendar thisWeek = Calendar.getInstance();
-        thisWeek.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        return chooseDate(thisWeek);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        return chooseDate(calendar);
     }
 
     /**
@@ -153,9 +177,9 @@ public class DateUtil {
      * @return long
      */
     public static long getMillisOfMonth() {
-        Calendar thisMonth = Calendar.getInstance();
-        thisMonth.set(Calendar.DAY_OF_MONTH, 1);
-        return chooseDate(thisMonth);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        return chooseDate(calendar);
     }
 
     /**
@@ -164,10 +188,10 @@ public class DateUtil {
      * @return long 毫秒值
      */
     private static long chooseDate(Calendar calendar) {
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMinimum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.SECOND, calendar.getActualMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MINUTE, calendar.getActualMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMinimum(Calendar.MILLISECOND));
         return calendar.getTime().getTime();
     }
 
