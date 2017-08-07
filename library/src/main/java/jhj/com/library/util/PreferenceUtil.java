@@ -13,6 +13,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 个人偏好设置
+ * Created by jhj on 17-7-31.
+ */
 public final class PreferenceUtil {
 
     public static <T> boolean save(Context context, T entity, String key) {

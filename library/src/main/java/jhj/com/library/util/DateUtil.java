@@ -1,5 +1,6 @@
 package jhj.com.library.util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -192,7 +193,7 @@ public class DateUtil {
         calendar.set(Calendar.SECOND, calendar.getActualMinimum(Calendar.SECOND));
         calendar.set(Calendar.MINUTE, calendar.getActualMinimum(Calendar.MINUTE));
         calendar.set(Calendar.MILLISECOND, calendar.getActualMinimum(Calendar.MILLISECOND));
-        return calendar.getTime().getTime();
+        return calendar.getTimeInMillis();
     }
 
     /**
@@ -215,6 +216,42 @@ public class DateUtil {
         } else {
             return false;
         }
+    }
+
+    /**
+     * 返回指定友好格式日期
+     *
+     * @return String
+     */
+    public static String getFriendlyDate(long millis) {
+        long oneDayMillis = 24 * 60 * 60 * 1000;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.CHINA);
+        SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd HH:mm", Locale.CHINA);
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+
+        long todayMillis = getMillisOfToday();
+        long yesterday = todayMillis - oneDayMillis;
+        long beforeYesterday = todayMillis - oneDayMillis * 2;
+
+        Calendar thisYear = Calendar.getInstance();
+        thisYear.setTimeInMillis(todayMillis);
+        thisYear.set(Calendar.DAY_OF_YEAR, 1);
+        long thisYearMillis = thisYear.getTimeInMillis();
+
+
+        if (millis >= todayMillis) { //当天 -> HH:mm
+            return sdf.format(new Date(millis));
+        } else if (millis < todayMillis && millis >= yesterday) { //昨天 -> 昨天 HH:mm
+            return String.format("昨天 %s", sdf.format(new Date(millis)));
+        } else if (millis < yesterday && millis >= beforeYesterday) { //前天 -> 前天 HH:mm
+            return String.format("前天 %s", sdf.format(new Date(millis)));
+        } else if (millis < beforeYesterday && millis >= thisYearMillis) { //今年 -> MM:dd HH:mm
+            return sdf1.format(new Date(millis));
+        } else { //往年 -> yyyy-MM-dd
+            return sdf2.format(new Date(millis));
+        }
+
     }
 
 }
