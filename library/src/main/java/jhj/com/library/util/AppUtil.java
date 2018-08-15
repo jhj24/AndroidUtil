@@ -36,6 +36,8 @@ public class AppUtil {
      */
     public static void setVibrate(Context context, long millis) {
         Vibrator vib = (Vibrator) context.getSystemService(Service.VIBRATOR_SERVICE);
-        vib.vibrate(millis);
+        if (vib != null) {
+            vib.vibrate(millis);
+        }
     }
 }

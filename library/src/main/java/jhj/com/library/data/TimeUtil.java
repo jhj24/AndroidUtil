@@ -1,4 +1,4 @@
-package jhj.com.library.util;
+package jhj.com.library.data;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jhj.com.library.util.permissions;
+package jhj.com.library.permissions;
 
 import java.util.List;
 

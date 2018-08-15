@@ -1,7 +1,6 @@
-package jhj.com.library.util.permissions;
+package jhj.com.library.permissions;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,10 +15,10 @@ public final class PermissionActivity extends Activity {
     static final String REQUEST_PERMISSIONS = "requestPermissions";
     static final String REQUEST_CODE = "requestCode";
 
-    private static PermissionListener mPermissionListener;
+    private static PermissionActivity.PermissionListener mPermissionListener;
     private int mRequestCode;
 
-    static void setPermissionListener(PermissionListener permissionListener) {
+    static void setPermissionListener(PermissionActivity.PermissionListener permissionListener) {
         mPermissionListener = permissionListener;
     }
 

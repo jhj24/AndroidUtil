@@ -1,4 +1,4 @@
-package jhj.com.library.util;
+package jhj.com.library.map;
 
 import java.math.BigDecimal;
 
