@@ -1,9 +1,10 @@
 package jhj.com.androidutil;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import jhj.com.library.math.LegalityUtil;
+import jhj.com.androidlibrary.math.LegalityUtil;
+import jhj.com.androidlibrary.util.UIUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,5 +15,7 @@ public class MainActivity extends AppCompatActivity {
         LegalityUtil.isTelephoneNum("123 45 6    7");
         LegalityUtil.isTelephoneNum(null);
         LegalityUtil.isTelephoneNum("");
+        UIUtil.percentWidth(this);
+
     }
 }
