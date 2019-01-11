@@ -1,4 +1,4 @@
-package jhj.com.androidlibrary.data;
+package jhj.com.androidlibrary.date;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

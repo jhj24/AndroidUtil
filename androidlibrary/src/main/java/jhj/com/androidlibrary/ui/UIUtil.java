@@ -1,4 +1,4 @@
-package jhj.com.androidlibrary.util;
+package jhj.com.androidlibrary.ui;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

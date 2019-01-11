@@ -31,6 +31,6 @@ public class Decimal {
      * @return String
      */
     public static String a(double num) {
-        return String.format(Locale.CHINA, "%.2f", num);
+        return String.format(Locale.getDefault(), "%.2f", num);
     }
 }

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import jhj.com.androidlibrary.math.LegalityUtil;
-import jhj.com.androidlibrary.util.UIUtil;
+import jhj.com.androidlibrary.ui.UIUtil;
 
 public class MainActivity extends AppCompatActivity {
 
